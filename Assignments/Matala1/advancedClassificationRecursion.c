@@ -9,7 +9,7 @@
 int isArmstronghelper(int num, int order)
 {
     if(num == 0){
-        return 0; 
+        return false; 
     }
     return (pow(num%10,order) +isArmstronghelper(num/10, order));
 }
@@ -18,8 +18,8 @@ int isArmstronghelper(int num, int order)
 */
 int isArmstrong(int num){
     if(num == isArmstronghelper(num, order(num)))
-        return 1; 
-    return 0;
+        return true; 
+    return false;
 }
 
 /**
