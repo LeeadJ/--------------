@@ -3,30 +3,37 @@
 #define true 1
 #define false 0
 
+/**
+* This recursive-function recieves a number and its length and returns the armstrong sum.
+*/
+int isArmstronghelper(int num, int order)
+{
+    if(num == 0){
+        return 0; 
+    }
+    return (pow(num%10,order) +isArmstronghelper(num/10, order));
+}
+/**
+* This function checks if a number is an Armstrong number using recursion.
+*/
 int isArmstrong(int num){
-    int sum=0, temp=num, power=0;
-    while(temp>0){
-        temp = temp/10;
-        power++;
-    }
-    temp=num;
-    while(temp>0){
-        int digit = temp%10;
-        sum += pow(digit, power);
-        temp = temp/10;
-    }
-    if(sum!=num){
-        return false;
-    }
-    return true;
+    if(num == isArmstronghelper(num, order(num)))
+        return 1; 
+    return 0;
 }
 
+/**
+* This function checks if a number is a Palindrome number using recursion.
+*/
 int isPalindrome(int num){
     //getting the length of the int:
     int temp=num, len=0;
     while(temp>0){
         temp=temp/10;
         len++;
+    }
+    if(len<2){
+        return true;
     }
     //creating an array of the integers:
     int arr[len], temp1=num, i=0;
@@ -35,12 +42,25 @@ int isPalindrome(int num){
         temp1=temp1/10;
         i++;
     }
-    //checking the first and last in the array:
-    for(int j=0; j<(len/2); j++){
-        if(arr[j] != arr[len-1-j]){
-            return false;
-        }
+    //checking the first and last digits in the array (base for recursion):
+    if(arr[0] != arr[len-1]){
+        return false;
     }
-    return true;
+    //Creating the new number without the first and last digits:
+    //finding the first digit:
+    int firstD=num, count=0;
+    while(firstD>10){
+        firstD=firstD/10;
+        count++;
+    }
+    while(count>0){
+        firstD = firstD*10;
+        count--;
+    }
+    int removeFirstD = num-firstD;
+    return isPalindrome(removeFirstD/10);
 }
+
+  
+    
 
