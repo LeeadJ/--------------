@@ -1,8 +1,12 @@
-#include<stdio.h>
-#include<math.h>
+#include <stdio.h>
+#include <math.h> //added for the pow function(in isArmstrong)
+#include "NumClass.h"
 #define true 1
 #define false 0
 
+/**
+* This function returns true(=1) if a given number is an Armstrong-number using a loop.
+*/
 int isArmstrong(int num){
     int sum=0, temp=num, power=0;
     while(temp>0){
@@ -43,4 +47,5 @@ int isPalindrome(int num){
     }
     return true;
 }
+
 
