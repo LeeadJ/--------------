@@ -1,5 +1,6 @@
-#include<stdio.h>
-#include<math.h>
+#include <stdio.h>
+#include <math.h> //added for the pow function(in isArmstronghelper)
+#include "NumClass.h"
 #define true 1
 #define false 0
 
@@ -9,9 +10,16 @@
 int isArmstronghelper(int num, int order)
 {
     if(num == 0){
-        return false; 
+        return 0; 
     }
     return (pow(num%10,order) +isArmstronghelper(num/10, order));
+}
+/**
+* This function calculates the length of number using recursion.
+*/
+int order(int num){
+    if(num > 0)
+    return(1 + order(num/10));
 }
 /**
 * This function checks if a number is an Armstrong number using recursion.
@@ -60,7 +68,3 @@ int isPalindrome(int num){
     int removeFirstD = num-firstD;
     return isPalindrome(removeFirstD/10);
 }
-
-  
-    
-
