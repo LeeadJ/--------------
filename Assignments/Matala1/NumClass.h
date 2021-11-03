@@ -5,3 +5,5 @@ int isStrong(int num);
 int isArmstrong(int num);
 
 int isPalindrome(int num);
+
+void main();
