@@ -1,43 +1,42 @@
-#include<stdio.h>
-#include"NumClass.h"
-#define true 1
-#define false 0
+#include <stdio.h>
+#include "NumClass.h"
+#define True 1 
+#define False 0
 
-/**
-* Function that returns if a numer is a prime-number. 
-*/
+// is strong function
+int isStrong(int x){
+    int sum, rem, i, fact, copy; 
+
+    sum = 0;
+    copy = x; 
+    while(copy != 0){
+        rem = copy%10;
+        fact = 1;
+
+    for(i = 1 ; i<=rem; i++){
+            fact = fact*i;
+        }
+        sum = sum + fact;
+        copy = copy/10;
+    }
+    if(sum == x){
+        return True;
+    }
+    else{
+        return False;
+    }
+
+}
+
+// is prime function
 int isPrime(int num){
-    if(num<2){
-        return false;
+    if(num==1){
+        return True;
     }
     for(int i=2; i<num; i++){
         if(num%i==0){
-            return false;
+            return False;
         }
     }
-    return true;
-}
-/**
-* Function that returns the factorial of a given number.
-*/
-int factorial(int num){
-    if(num==1){
-        return 1;
-    }
-    return num*factorial(num-1);
-}
-/**
-* Function that returns if a number is a strong-number. 
-*/
-int isStrong(int num){
-    int sum=0, temp=num;
-    while(temp>0){
-        int digit = temp%10;
-        sum += factorial(digit);
-        temp = temp/10;
-    }
-    if(num!=sum){
-        return false;
-    }
-    return true;
+    return True;
 }

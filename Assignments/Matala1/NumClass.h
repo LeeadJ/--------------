@@ -1,9 +1,9 @@
-int isPrime(int num);
+int isArmstrong(int a);
 
-int isStrong(int num);
+int isPalindrome(int a);
 
-int isArmstrong(int num);
+int isPrime(int a);
 
-int isPalindrome(int num);
+int isStrong(int a); 
 
-void main();
+int main();

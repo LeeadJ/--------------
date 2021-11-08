@@ -1,12 +1,53 @@
 #include <stdio.h>
-#include <math.h> //added for the pow function(in isArmstronghelper)
+#include <math.h>
 #include "NumClass.h"
-#define true 1
-#define false 0
+#define True 1 
+#define False 0
+
+
+// function to calculate the order of the number using recursion
+int order(int num){
+    if(num > 0){
+    return(1 + order(num/10));
+    }
+    return 0;
+}
+
 
 /**
-* This recursive-function recieves a number and its length and returns the armstrong sum.
-*/
+ * Recursive function to find reverse of any number
+ */
+int reverse(int num)
+{
+    /* Find number of digits in num */
+    int digit = order(num)-1;
+    
+    /* Recursion base condition */
+    if(num == 0)
+        return 0;
+
+    return ((num%10 * pow(10, digit)) + reverse(num/10));
+}
+
+/**
+ * Function to check if a number is palindrome or not.
+ * This function returns 1 if the number is palindrome otherwise 0.
+ */
+int isPalindrome(int num)
+{
+    /* 
+     * Check if the given number is equal to 
+     * its reverse.
+     */
+    if(num == reverse(num))
+    {
+        return True;
+    }
+    
+    return False;
+}
+
+// the recursion function that will return a result of armstrong.
 int isArmstronghelper(int num, int order)
 {
     if(num == 0){
@@ -14,57 +55,10 @@ int isArmstronghelper(int num, int order)
     }
     return (pow(num%10,order) +isArmstronghelper(num/10, order));
 }
-/**
-* This function calculates the length of number using recursion.
-*/
-int order(int num){
-    if(num > 0)
-    return(1 + order(num/10));
-}
-/**
-* This function checks if a number is an Armstrong number using recursion.
-*/
+
+//the main function to check if a numer is armstrong
 int isArmstrong(int num){
     if(num == isArmstronghelper(num, order(num)))
-        return true; 
-    return false;
-}
-
-/**
-* This function checks if a number is a Palindrome number using recursion.
-*/
-int isPalindrome(int num){
-    //getting the length of the int:
-    int temp=num, len=0;
-    while(temp>0){
-        temp=temp/10;
-        len++;
-    }
-    if(len<2){
-        return true;
-    }
-    //creating an array of the integers:
-    int arr[len], temp1=num, i=0;
-    while(temp1>0){
-        arr[i]=temp1%10;
-        temp1=temp1/10;
-        i++;
-    }
-    //checking the first and last digits in the array (base for recursion):
-    if(arr[0] != arr[len-1]){
-        return false;
-    }
-    //Creating the new number without the first and last digits:
-    //finding the first digit:
-    int firstD=num, count=0;
-    while(firstD>10){
-        firstD=firstD/10;
-        count++;
-    }
-    while(count>0){
-        firstD = firstD*10;
-        count--;
-    }
-    int removeFirstD = num-firstD;
-    return isPalindrome(removeFirstD/10);
+        return True; 
+    return False;
 }

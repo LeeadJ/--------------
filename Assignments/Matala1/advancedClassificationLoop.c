@@ -1,51 +1,72 @@
 #include <stdio.h>
-#include <math.h> //added for the pow function(in isArmstrong)
 #include "NumClass.h"
-#define true 1
-#define false 0
+#define True 1 
+#define False 0
 
-/**
-* This function returns true(=1) if a given number is an Armstrong-number using a loop.
+/* Function to calculate x raised to the power y */
+ int power(int x, unsigned int y){
+     if(y == 0){
+         return 1;
+     }
+     int temp = x;
+     while(y>1){
+         x *= temp;
+         y--;
+         }
+    
+     return x;
+ }
+/* Function to calculate the length of a given number */
+int order(int x)
+{
+    int n = 0;
+    while (x) {
+        n++;
+        x = x / 10;
+    }
+    return n;
+}
+ 
+/* Function to check whether the given number is
+ Armstrong number or not */
+int isArmstrong(int x)
+{
+    // Calling order function
+    int n = order(x);
+    int temp = x, sum = 0;
+    while (temp) {
+        int r = temp % 10;
+        sum += power(r, n);
+        temp = temp / 10;
+    }
+ 
+    // If satisfies Armstrong condition
+    if (sum == x)
+        return True;
+    else
+        return False;
+}
+
+/* Functhion that will reverse a number
 */
-int isArmstrong(int num){
-    int sum=0, temp=num, power=0;
-    while(temp>0){
-        temp = temp/10;
-        power++;
+int reverse(int x){
+    int temp, counter;
+    temp = 0;
+    counter = order(x)-1; 
+    while(x!=0){
+        temp += (x%10) * power(10, counter--);
+        x/= 10;
     }
-    temp=num;
-    while(temp>0){
-        int digit = temp%10;
-        sum += pow(digit, power);
-        temp = temp/10;
-    }
-    if(sum!=num){
-        return false;
-    }
-    return true;
+    return temp;
 }
 
-int isPalindrome(int num){
-    //getting the length of the int:
-    int temp=num, len=0;
-    while(temp>0){
-        temp=temp/10;
-        len++;
+/* functhion that will check if a number is palindrome
+*/
+int isPalindrome(int x){
+    int r;
+    r = reverse(x);
+    if(r == x){
+        return True;
     }
-    //creating an array of the integers:
-    int arr[len], temp1=num, i=0;
-    while(temp1>0){
-        arr[i]=temp1%10;
-        temp1=temp1/10;
-        i++;
-    }
-    //checking the first and last in the array:
-    for(int j=0; j<(len/2); j++){
-        if(arr[j] != arr[len-1-j]){
-            return false;
-        }
-    }
-    return true;
+    return False;
 }
-
-
